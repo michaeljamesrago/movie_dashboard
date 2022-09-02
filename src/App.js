@@ -1,12 +1,13 @@
 import './App.css'
 import { useState } from 'react'
+import { NavLink, Outlet } from 'react-router-dom'
 import SearchForm from './components/SearchForm'
 import MovieList from './components/MovieList'
 import apiClient from './lib/apiClient'
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("")
-  const [errorMessage, setErrorMessage] = useState("")
+  // const [errorMessage, setErrorMessage] = useState("")
   const [movies, setMovies] = useState([])
 
   const handleSearchTermChange = (e) => {
@@ -18,9 +19,17 @@ function App() {
     console.log(e.target)
     apiClient.fetchMovies(
       (data) => {
+        console.log(data)
         setMovies(data.data)
       }
     )
+  }
+
+  const activeLinkStyle = ({ isActive }) => {
+    return {
+    margin: "1rem 0",
+    color: isActive ? "red" : "",
+    };
   }
 
   return (
@@ -28,15 +37,13 @@ function App() {
       <header>
         <h1>Movie Search</h1>
       </header>
-      <nav>
-        <button>Search Movies</button>
-        <button>Favorites</button>
+      <nav>*
+        <NavLink style = {activeLinkStyle} to="/top">Top Movies</NavLink>   *
+        <NavLink style = {activeLinkStyle} to="/search">Search Movies</NavLink>   *
+        <NavLink style = {activeLinkStyle} to="/favorites">Favorites</NavLink>   *
       </nav>
       <main>
-        <SearchForm searchTerm={searchTerm}
-          onChange={handleSearchTermChange}
-          onSubmit={handleSubmit}/>
-        <MovieList movies={movies} />
+        <Outlet />
       </main>
     </div>
   );
