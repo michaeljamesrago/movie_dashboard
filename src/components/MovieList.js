@@ -1,12 +1,16 @@
 import MovieListItem from "./MovieListItem"
 
-const MovieList = ({ movies }) => {
+const MovieList = ({ movies, isFavorite, handleFavorite }) => {
     return (
-        movies.map((movie) => {
-            return (
-                <MovieListItem movie={movie} />
-            )
-        })
+        <div>
+            <ul>
+              {movies.map((movie) => {
+                return (
+                  <MovieListItem  key={movie.id} movie={movie} isFavorite={isFavorite} handleFavorite={handleFavorite} />
+                )
+              })}
+            </ul>
+        </div>
     )
 }
 

@@ -1,5 +1,9 @@
-export default function Top() {
+import MovieList from "../components/MovieList"
+
+export default function Top({ topMovies, isFavorite, handleFavorite }) {
     return (
-        <h1>The Top Movies Right Now</h1>
+        <div>
+            <MovieList movies={topMovies} isFavorite={isFavorite} handleFavorite={handleFavorite} />
+        </div>
     )
 }

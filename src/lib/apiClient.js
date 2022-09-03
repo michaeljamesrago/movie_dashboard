@@ -1,9 +1,22 @@
-import data from '../data'
+import { mockAPI } from '../data'
 const apiClient = {
-    fetchMovies(callback, errorHandler) {
+    fetchTopMovies(callback) {
         return new Promise((resolve, reject) => {
-            console.log('responding with data')
-            resolve({ data });
+            const data = mockAPI.getTop()
+            setTimeout(() => {
+                resolve(data);
+            }, 2000)
+        }).then(response => {
+            callback(response)
+        })
+    }, 
+    searchMovies(callback, errorHandler) {
+        return new Promise((resolve, reject) => {
+            const data = mockAPI.getSearch()
+            setTimeout(() => {
+                console.log(data)
+                resolve(data);
+            }, 2000)
         }).then(response => {
             callback(response)
         })
