@@ -19,24 +19,37 @@ function App() {
 
   useEffect(() => {
     const favorites = JSON.parse(localStorage.getItem('favoriteMovies')) || [];
-    setFavoriteMovies(favorites)
+    setSortedMovies(favorites, setFavoriteMovies)
     apiClient.fetchTopMovies(
       (data) => {
-        setTopMovies(data.items)
+        setTopMovies(data.items);
       }
     )
-  }, [topMovies])
+  }, [setTopMovies])
+
+  function setSortedMovies(movies, setterFunction) {
+    const sortedMovies = movies
+      .slice()
+      .sort((movieA, movieB) => {
+      let result;
+      if (isFavorite(movieA.id) && !isFavorite(movieB.id)) result = -1;
+      else if (isFavorite(movieB.id) && !isFavorite(movieA.id)) result = 1;
+      else result = movieA.title < movieB.title ? -2 : 2;
+      console.log(result)
+      return result;
+    })
+    setterFunction(sortedMovies)
+  }
 
   function handleSearchTermChange(e) {
     setSearchTerm(e.target.value)
   }
 
   const handleSubmit = (e) => {
-    console.log("submitted")
     e.preventDefault();
     apiClient.searchMovies(
       (data) => {
-        setSearchMovies(data.results)
+        setSortedMovies(data.results, setSearchMovies)
       }
     )
   }
@@ -58,7 +71,7 @@ function App() {
         .concat(movie)
       }
       localStorage.setItem('favoriteMovies', JSON.stringify(newFavorites))
-      setFavoriteMovies(newFavorites);
+      setSortedMovies(newFavorites, setFavoriteMovies);
     }
   }
 
@@ -66,7 +79,7 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Home />}>
+          <Route path='/' element={<Home topMovies={topMovies}/>}>
             <Route index element={
               <Top 
                 topMovies={topMovies}

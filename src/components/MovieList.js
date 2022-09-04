@@ -2,14 +2,12 @@ import MovieListItem from "./MovieListItem"
 
 const MovieList = ({ movies, isFavorite, handleFavorite }) => {
     return (
-        <div>
-            <ul>
+        <div className="movie-list-container">
               {movies.map((movie) => {
                 return (
                   <MovieListItem  key={movie.id} movie={movie} isFavorite={isFavorite} handleFavorite={handleFavorite} />
                 )
               })}
-            </ul>
         </div>
     )
 }

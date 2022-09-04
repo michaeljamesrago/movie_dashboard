@@ -14,7 +14,6 @@ const apiClient = {
         return new Promise((resolve, reject) => {
             const data = mockAPI.getSearch()
             setTimeout(() => {
-                console.log(data)
                 resolve(data);
             }, 2000)
         }).then(response => {
