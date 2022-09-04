@@ -1,5 +1,5 @@
 import MovieList from "../components/MovieList"
-export default function Favorites( { favoriteMovies, isFavorite, handleFavorite }) {
+export default function Favorites( { favoriteMovies, isFavorite, handleFavorite}) {
     return (
       <div> 
         {favoriteMovies.length !== 0 ? <>

@@ -19,7 +19,7 @@ function App() {
 
   useEffect(() => {
     const favorites = JSON.parse(localStorage.getItem('favoriteMovies')) || [];
-    setSortedMovies(favorites, setFavoriteMovies)
+    setFavoriteMovies(favorites)
     apiClient.fetchTopMovies(
       (data) => {
         setTopMovies(data.items);
@@ -27,7 +27,8 @@ function App() {
     )
   }, [setTopMovies])
 
-  function setSortedMovies(movies, setterFunction) {
+  function sortMovies(movies) {
+    console.log("Sorting Movies")
     const sortedMovies = movies
       .slice()
       .sort((movieA, movieB) => {
@@ -35,10 +36,9 @@ function App() {
       if (isFavorite(movieA.id) && !isFavorite(movieB.id)) result = -1;
       else if (isFavorite(movieB.id) && !isFavorite(movieA.id)) result = 1;
       else result = movieA.title < movieB.title ? -2 : 2;
-      console.log(result)
       return result;
     })
-    setterFunction(sortedMovies)
+    return sortedMovies
   }
 
   function handleSearchTermChange(e) {
@@ -47,9 +47,11 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    apiClient.searchMovies(
+    apiClient.searchMovies(e.target.searchterm.value,
       (data) => {
-        setSortedMovies(data.results, setSearchMovies)
+        console.log(data)
+        const sortedMovies = sortMovies(data.results)
+        setSearchMovies(sortedMovies)
       }
     )
   }
@@ -60,7 +62,7 @@ function App() {
     })
   }
 
-  const handleFavorite = (movie) => {
+  const handleFavorite = (movie) => { //update this https://www.w3schools.com/react/react_usestate.asp and pass a utility object with useContext
     return (movieId) => {
       let newFavorites = favoriteMovies.slice()
       if (isFavorite(movieId)) {
@@ -70,8 +72,11 @@ function App() {
         newFavorites = newFavorites
         .concat(movie)
       }
+      newFavorites.sort((movieA, movieB) => {
+        return movieA.title < movieB.title ? -1 : 1;
+      })
       localStorage.setItem('favoriteMovies', JSON.stringify(newFavorites))
-      setSortedMovies(newFavorites, setFavoriteMovies);
+      setFavoriteMovies(newFavorites);
     }
   }
 
