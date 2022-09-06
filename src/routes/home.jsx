@@ -14,7 +14,7 @@ export default function Home({ topMovies }) {
           <h1>Movie Search</h1>
         </header>
         <nav>*
-          <NavLink style = {activeLinkStyle} to="/top" state={{ data: topMovies }}>Top Movies</NavLink>   *
+          <NavLink style = {activeLinkStyle} to="/top">Top Movies</NavLink>   *
           <NavLink style = {activeLinkStyle} to="/search">Search Movies</NavLink>   *
           <NavLink style = {activeLinkStyle} to="/favorites">Favorites</NavLink>   *
         </nav>

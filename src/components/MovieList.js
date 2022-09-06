@@ -12,12 +12,9 @@ function MovieListItems( { currentItems, isFavorite, handleFavorite } ) {
     </>
   );
 }
-const MovieList = ({ movies, isFavorite, handleFavorite, itemsPerPage=10 }) => {
-   // We start with an empty list of items.
+const MovieList = ({ movies, isFavorite, handleFavorite, itemsPerPage=5 }) => {
    const [currentItems, setCurrentItems] = useState(null);
    const [pageCount, setPageCount] = useState(0);
-   // Here we use item offsets; we could also use page offsets
-   // following the API or data you're working with.
    const [itemOffset, setItemOffset] = useState(0);
 
   useEffect(() => {
@@ -36,18 +33,27 @@ const MovieList = ({ movies, isFavorite, handleFavorite, itemsPerPage=10 }) => {
   };
 
   return (
+    <>
+      <div class="paginate-container">
+        <ReactPaginate
+          breakLabel="..."
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={5}
+          renderOnZeroPageCount={null}
+          previousLabel={"← Previous"}
+          nextLabel={"Next →"}
+          pageCount={pageCount}
+          containerClassName={"pagination"}
+          previousLinkClassName={"pagination__link"}
+          nextLinkClassName={"pagination__link"}
+          disabledClassName={"pagination__link--disabled"}
+          activeClassName={"pagination__link--active"}
+        />
+      </div>
       <div className="movie-list-container">
         <MovieListItems isFavorite={isFavorite} handleFavorite={handleFavorite} currentItems={currentItems} />
-        <ReactPaginate
-        breakLabel="..."
-        nextLabel="next >"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
-        pageCount={pageCount}
-        previousLabel="< previous"
-        renderOnZeroPageCount={null}
-      />
       </div>
+    </>
   )
 }
 
