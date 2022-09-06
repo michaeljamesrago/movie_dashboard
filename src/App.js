@@ -28,7 +28,6 @@ function App() {
   }, [setTopMovies])
 
   function sortMovies(movies) {
-    console.log("Sorting Movies")
     const sortedMovies = movies
       .slice()
       .sort((movieA, movieB) => {
@@ -62,7 +61,7 @@ function App() {
     })
   }
 
-  const handleFavorite = (movie) => { //update this https://www.w3schools.com/react/react_usestate.asp and pass a utility object with useContext
+  const handleFavorite = (movie) => {
     return (movieId) => {
       let newFavorites = favoriteMovies.slice()
       if (isFavorite(movieId)) {

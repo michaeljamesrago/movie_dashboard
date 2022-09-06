@@ -17,10 +17,9 @@ const MovieListItem = ({ movie, isFavorite, handleFavorite }) => {
               </div>
             </div>
             <div className="art-container">
-                <img className="movie-art" src={movie.image} />
+                <img className="movie-art" src={`https://imdb-api.com/API/ResizeImage?apikey=k_q246kim4&size=128x176&url=${movie.image}`} />
             </div>
           </div>
     )
 }
-
 export default MovieListItem
