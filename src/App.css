@@ -1,3 +1,32 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: white;
+}
+
+a:link, a:visited {
+  color: black;
+}
+
+.nav {
+  display: flex;
+  color: #16213e;
+}
+
+.nav-button {
+  display: inline-block;
+  font-family: monospace;
+  font-size: 24px;
+  text-shadow: 1px 1px 1px black;
+  background-color: yellow;
+  text-decoration: none;
+  padding: 6px 12px;
+  margin: 4px 8px;
+  border: 4px dashed black;
+}
+
 .movie-list-container {
   display: flex;
   flex-flow: wrap;
@@ -61,3 +90,42 @@
   max-width: 700px;
   min-width: 500px;
 }
+
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+}
+.modal-content {
+  width: 500px;
+  background-color: #fff;
+  border: 3px solid black;
+  border-radius: 10px;
+  padding: 15px 10px;
+  overflow-y: scroll;
+  max-height: 400px;
+}
+.modal-title {
+  text-align: center;
+  font-size: 24px;
+  padding: 7px;
+  background-color: pink;
+  border-radius: 4px;
+}
+.modal-item {
+  padding: 10px;
+}
+
+.username {
+  font-style: italic;
+  font-size: 12px;
+  padding: 8px 0px 5px 10px;
+}
+

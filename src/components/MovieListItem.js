@@ -1,6 +1,6 @@
 import redheart from '../images/redheart.png'
 import heart from '../images/heart.png'
-const MovieListItem = ({ movie, isFavorite, handleFavorite }) => {
+const MovieListItem = ({ movie, isFavorite, handleFavorite, handleClick}) => {
     const favoriteHandler = handleFavorite(movie);
     const favoriteOrUnfavorite = isFavorite(movie.id) ? redheart : heart
     return (
@@ -17,7 +17,7 @@ const MovieListItem = ({ movie, isFavorite, handleFavorite }) => {
               </div>
             </div>
             <div className="art-container">
-                <img className="movie-art" src={movie.image} alt={movie.title} />
+                <img className="movie-art" data-id={`${movie.id}`} src={movie.image} alt={movie.title} onClick={(e) => handleClick(e, movie)} />
             </div>
           </div>
     )

@@ -1,21 +1,15 @@
 import { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import MovieListItem from "./MovieListItem"
+import MovieDetail from './MovieDetail';
+import apiClient from '../lib/apiClient';
 
-function MovieListItems( { currentItems, isFavorite, handleFavorite } ) {
-  return (
-    <>
-      {currentItems &&
-        currentItems.map((movie) => (
-          <MovieListItem  key={movie.id} movie={movie} isFavorite={isFavorite} handleFavorite={handleFavorite} />
-        ))}
-    </>
-  );
-}
 const MovieList = ({ movies, isFavorite, handleFavorite, itemsPerPage=5 }) => {
-   const [currentItems, setCurrentItems] = useState(null);
-   const [pageCount, setPageCount] = useState(0);
-   const [itemOffset, setItemOffset] = useState(0);
+  const [currentItems, setCurrentItems] = useState(null);
+  const [pageCount, setPageCount] = useState(0);
+  const [itemOffset, setItemOffset] = useState(0);
+  const [showDetail, setShowDetail] = useState(false)
+  const [modalContent, setModalContent] = useState(null)
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
@@ -23,6 +17,15 @@ const MovieList = ({ movies, isFavorite, handleFavorite, itemsPerPage=5 }) => {
     setCurrentItems(movies.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(movies.length / itemsPerPage));
   }, [itemOffset, itemsPerPage, movies]);
+
+  const handleClick = (e) => {
+    console.log(e.target.dataset.id)
+    e.preventDefault()
+    apiClient.fetchMovieReviews(e.target.dataset.id, (data) => {
+      setModalContent(data)
+    })
+    setShowDetail(true)
+  }
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % movies.length;
@@ -32,9 +35,13 @@ const MovieList = ({ movies, isFavorite, handleFavorite, itemsPerPage=5 }) => {
     setItemOffset(newOffset);
   };
 
+  const onClose = () => {
+    setShowDetail(false)
+    setModalContent(null)
+  }
   return (
     <>
-      <div class="paginate-container">
+      <div className="paginate-container">
         <ReactPaginate
           breakLabel="..."
           onPageChange={handlePageClick}
@@ -51,8 +58,13 @@ const MovieList = ({ movies, isFavorite, handleFavorite, itemsPerPage=5 }) => {
         />
       </div>
       <div className="movie-list-container">
-        <MovieListItems isFavorite={isFavorite} handleFavorite={handleFavorite} currentItems={currentItems} />
+        {currentItems &&
+          currentItems.map((movie) => (
+            <MovieListItem  key={movie.id} movie={movie} isFavorite={isFavorite} handleFavorite={handleFavorite} handleClick={handleClick} />
+          ))
+        }
       </div>
+      <MovieDetail show={showDetail} onClose={onClose} modalContent={modalContent}/>
     </>
   )
 }
