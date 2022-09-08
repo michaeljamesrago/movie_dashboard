@@ -1,6 +1,5 @@
 const MovieDetail = ({ show, onClose, modalContent}) => {
     if (!show) return null
-    console.log(modalContent)
     return (
         <div className="modal" onClick={() => onClose()}>
             {!!modalContent ? 
@@ -13,7 +12,7 @@ const MovieDetail = ({ show, onClose, modalContent}) => {
                     {detail.title}<div className="username"> - {detail.username}</div>
                   </div>)
                 }
-              </div>: <>There is no content</>
+              </div>: null
             }
         </div>
     )

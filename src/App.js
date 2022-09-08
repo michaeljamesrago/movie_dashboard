@@ -10,12 +10,14 @@ import Home from './routes/home';
 import Top from './routes/top'
 import Search from './routes/search'
 import Favorites from './routes/favorites'
+import Notification from './components/Notification';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("")
   const [searchMovies, setSearchMovies] = useState([])
   const [topMovies, setTopMovies] = useState([])
   const [favoriteMovies, setFavoriteMovies] = useState([])
+  const [errorMessage, setErrorMessage] = useState("")
 
   useEffect(() => {
     // When the app component renders for the first time, it fetches the list
@@ -25,6 +27,9 @@ function App() {
     apiClient.fetchTopMovies(
       (data) => {
         setTopMovies(data.items);
+      },
+      (err) => {
+        setErrorMessage(`Error: ${err.message}`)
       }
     )
   }, [setTopMovies])
@@ -55,6 +60,9 @@ function App() {
       (data) => {
         const sortedMovies = sortMovies(data.results)
         setSearchMovies(sortedMovies)
+      },
+      (err) => {
+        setErrorMessage(`Error: ${err.message}`)
       }
     )
   }
@@ -87,6 +95,7 @@ function App() {
 
   return (
     <div>
+      <Notification message={errorMessage} />
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home topMovies={topMovies}/>}>

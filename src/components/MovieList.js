@@ -30,9 +30,14 @@ const MovieList = ({ movies, isFavorite, handleFavorite, itemsPerPage=5 }) => {
     // state and makes visible a modal element that shows those reviews.
     console.log(e.target.dataset.id)
     e.preventDefault()
-    apiClient.fetchMovieReviews(e.target.dataset.id, (data) => {
+    apiClient.fetchMovieReviews(e.target.dataset.id, 
+      (data) => {
       setModalContent(data)
-    })
+      },
+      (err) => {
+        console.log(err)
+      }
+    )
     setShowDetail(true)
   }
 

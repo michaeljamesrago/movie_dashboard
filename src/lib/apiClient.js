@@ -4,20 +4,29 @@ import cacheClient from "./cacheClient"
 // originating in this app are defined here.
 const APIKEY = "k_gecxxitm"
 const apiClient = {
-    fetchTopMovies(callback) {
+    fetchTopMovies(callback, errorHandler) {
       const url = `https://imdb-api.com/en/API/MostPopularMovies/${APIKEY}`
       cacheClient.readThrough(url, () => axios.get(url))
       .then(response => callback(response))
+      .catch(err => {
+        errorHandler(err)
+      })
     },
-    searchMovies(searchterm, callback) {
+    searchMovies(searchterm, callback, errorHandler) {
       const url = `https://imdb-api.com/en/API/SearchMovie/${APIKEY}/${searchterm}`
       cacheClient.readThrough(url, () => axios.get(url))
       .then(response => callback(response))
+      .catch(err => {
+        errorHandler(err)
+      })
     },
-    fetchMovieReviews(movieId, callback) {
+    fetchMovieReviews(movieId, callback, errorHandler) {
       const url = `https://imdb-api.com/en/API/Reviews/${APIKEY}/${movieId}`
       cacheClient.readThrough(url, () => axios.get(url))
       .then(response => callback(response))
+      .catch(err => {
+        errorHandler(err)
+      })
     }
 }
 
