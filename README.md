@@ -1,5 +1,5 @@
 # Instructions
-Starting in the root directory, find the file "./lib/apiClient.js". You should see this on Line 3:
+Starting in the root directory, find the file "./src/lib/apiClient.js". You should see this on Line 3:
 
     // const APIKEY = "<Your IMDB API key goes here>"
     
