@@ -3,7 +3,24 @@
 }
 
 body {
-  background-color: white;
+  background-color: #31087b;
+}
+
+header {
+  background-color: #100720;
+  padding: 8px 3px;
+}
+
+.header-title {
+  color: #ffc23c;
+  line-height: 56px;
+  width: 890px;
+  padding: 12px 0px 5px 15px;
+  font-size: 64px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-weight: bold;
+  text-shadow: 2px 2px 10px red;
+  border: 5px dotted silver;
 }
 
 a:link, a:visited {
@@ -11,26 +28,35 @@ a:link, a:visited {
 }
 
 .nav {
+  position: relative;
   display: flex;
-  color: #16213e;
+  justify-content: left;
+  background-color:#100720;
 }
 
 .nav-button {
+  color: inherit;
+  position: relative;
   display: inline-block;
   font-family: monospace;
   font-size: 24px;
-  text-shadow: 1px 1px 1px black;
-  background-color: yellow;
+  text-shadow: inherit;
+  background-color: inherit;
   text-decoration: none;
   padding: 6px 12px;
-  margin: 4px 8px;
-  border: 4px dashed black;
+  border: 4px dashed #100720;
 }
 
 .movie-list-container {
   display: flex;
   flex-flow: wrap;
+  width: 890px;
 }
+
+.main h3 {
+  color: pink;
+}
+
 .movie-title-bar {
   height: 28px;
   background-color: beige;
@@ -68,8 +94,8 @@ a:link, a:visited {
 .pagination a {
   padding: 4px;
   border-radius: 5px;
-  border: 1px solid #6c7ac9;
-  color: #6c7ac9;
+  color: rgb(198, 197, 202);
+  border: 1px solid rgb(198, 197, 202);
 }
 
 .pagination__link {
@@ -82,8 +108,9 @@ a:link, a:visited {
 }
 
 .pagination__link--disabled a {
-  color: rgb(198, 197, 202);
-  border: 1px solid rgb(198, 197, 202);
+  cursor:default;
+  border: 1px solid #6c7ac9;
+  color: #6c7ac9;
 }
 
 .paginate-container {

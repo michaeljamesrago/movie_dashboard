@@ -1,4 +1,5 @@
 import MovieList from "../components/MovieList"
+// This route displays the movies that have been added to the Favorites list.
 export default function Favorites( { favoriteMovies, isFavorite, handleFavorite }) {
   return (
     <div> 

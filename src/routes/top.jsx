@@ -1,5 +1,5 @@
 import MovieList from "../components/MovieList"
-
+// This route displays the top movies.
 export default function Top({ topMovies, isFavorite, handleFavorite }) {
     return (
         <div>

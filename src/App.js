@@ -18,6 +18,8 @@ function App() {
   const [favoriteMovies, setFavoriteMovies] = useState([])
 
   useEffect(() => {
+    // When the app component renders for the first time, it fetches the list
+    // of top movies from the server, and updates the state with that data.
     const favorites = JSON.parse(localStorage.getItem('favoriteMovies')) || [];
     setFavoriteMovies(favorites)
     apiClient.fetchTopMovies(
@@ -28,6 +30,7 @@ function App() {
   }, [setTopMovies])
 
   function sortMovies(movies) {
+    //Sorts movies by whether they're favorites, then alphabetically by title.
     const sortedMovies = movies
       .slice()
       .sort((movieA, movieB) => {
@@ -41,14 +44,15 @@ function App() {
   }
 
   function handleSearchTermChange(e) {
+    // Handler for controlled text input element in ./routes/search.jsx
     setSearchTerm(e.target.value)
   }
 
   const handleSubmit = (e) => {
+    // Handler for submit event from form element in ./components/SearchForm.js
     e.preventDefault();
     apiClient.searchMovies(e.target.searchterm.value,
       (data) => {
-        console.log(data)
         const sortedMovies = sortMovies(data.results)
         setSearchMovies(sortedMovies)
       }
@@ -56,12 +60,14 @@ function App() {
   }
 
   const isFavorite = (movieId) => {
+    // Returns true if input string movieId is the id of a favorited movie.
     return favoriteMovies.some(favorite => {
       return favorite.id === movieId;
     })
   }
 
   const handleFavorite = (movie) => {
+    /* This function toggles the movie between favorite and non-favorite. */
     return (movieId) => {
       let newFavorites = favoriteMovies.slice()
       if (isFavorite(movieId)) {

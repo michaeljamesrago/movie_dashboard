@@ -9,7 +9,7 @@ const MovieDetail = ({ show, onClose, modalContent}) => {
                   What people are saying about <em>{modalContent.title}</em>
                 </div>
                 {modalContent.items.map(detail => 
-                  <div className="modal-item">
+                  <div className="modal-item" key={`${detail.title}${detail.username}`}>
                     {detail.title}<div className="username"> - {detail.username}</div>
                   </div>)
                 }
