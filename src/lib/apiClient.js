@@ -1,8 +1,9 @@
 import axios from "axios"
 import cacheClient from "./cacheClient"
+// const APIKEY = "<Your IMDB API key goes here>"
 // This is the client that communicates with the API server. All HTTP requests 
 // originating in this app are defined here.
-const APIKEY = "k_gecxxitm"
+
 const apiClient = {
     fetchTopMovies(callback, errorHandler) {
       const url = `https://imdb-api.com/en/API/MostPopularMovies/${APIKEY}`
