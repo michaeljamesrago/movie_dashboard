@@ -3,7 +3,7 @@ Starting in the root directory, find the file "./src/lib/apiClient.js". You shou
 
     // const APIKEY = "Your IMDB API key goes here"
     
-Replace "Your IMDB API key goes here" with your IMDB API key. You can get an IMDB API key at https://imdb-api.com
+Uncomment this line and replace "Your IMDB API key goes here" with your IMDB API key. You can get an IMDB API key at https://imdb-api.com
 
 Then, open a terminal in the project's root directory. Enter the following command:
 
